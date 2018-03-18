@@ -17,12 +17,15 @@
   var database = firebase.database();
 
   var trainName= $("#name-input").val();
-  var destination=$("#role-input").val();
-  var firstTrain=moment($("#start-input").val());
-  var frequencyMin=moment($("#rate-input").val());
+  var destination= $("#role-input").val();
+  var firstTrain= moment($("#start-input").val());
+  var frequencyMin= moment($("#rate-input").val());
 
+    $("#add-train").on("click", function(event) {
 
-  var NewTrain= {
+    
+
+    var NewTrain= {
       name: trainName,
       arrival: destination,
       firstT: firstTrain,
@@ -35,3 +38,7 @@
   console.log(NewTrain.arrival);
   console.log(NewTrain.firstT);
   console.log(NewTrain.frequency);
+
+
+
+})
