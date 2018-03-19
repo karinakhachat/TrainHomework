@@ -44,7 +44,7 @@ $(document).ready(function () {
     console.log(NewTrain.frequency);
 
     return false;
-
+//emptying function
     function empty () {
       
     $("#name-input").empty();
@@ -54,5 +54,22 @@ $(document).ready(function () {
     }
 
     empty()
+
+    data.ref().orderByChild("dateAdded").limitToLast(1).on("child_added"), function(snapshot){
+
+      $("#name-input").text(snapshot.val().name);
+      $("role-input").text(snapshot.val().arrival);
+      $("#start-input").text(snapshot.val().firstT);
+      $("#rate-input").text(snapshot.val().frequency);
+    }
+
+//make time conversions with moment.js
+
+    var newFrequency = 0;
+    var currentTime = moment();
+    var firstTime = 0;
+    var minutesAway = 0;
+
+//calculate when next train will arive
   })
 })
