@@ -12,10 +12,8 @@ $(document).ready(function (){
   console.log(config);
 
   firebase.initializeApp(config);
-      window.onload(function (){
-      console.log("onload")
-      })
       
+
   var database = firebase.database();
 
   var trainName= $("#name-input").val();
