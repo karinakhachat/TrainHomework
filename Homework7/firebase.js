@@ -13,20 +13,21 @@ $(document).ready(function (){
 
   firebase.initializeApp(config);
       
+ $("#add-train").on("click", function() {
 
   var database = firebase.database();
 
   var trainName = $("#name-input").val();
   var destination = $("#role-input").val();
-  var firstTrain = moment($("#start-input").val());
-  var frequencyMin = moment($("#rate-input").val());
+  var firstTrain = $("#start-input").val();
+  var frequencyMin = $("#rate-input").val();
 
 
 //adding the train info function 
-    $("#add-train").on("click", function(event) {
+   
 
 
-    var NewTrain= {
+    var NewTrain = {
       name: trainName,
       arrival: destination,
       firstT: firstTrain,
