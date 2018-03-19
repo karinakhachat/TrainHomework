@@ -16,10 +16,10 @@ $(document).ready(function (){
 
   var database = firebase.database();
 
-  var trainName= $("#name-input").val();
-  var destination= $("#role-input").val();
-  var firstTrain= moment($("#start-input").val());
-  var frequencyMin= moment($("#rate-input").val());
+  var trainName = $("#name-input").val();
+  var destination = $("#role-input").val();
+  var firstTrain = moment($("#start-input").val());
+  var frequencyMin = moment($("#rate-input").val());
 
 
 //adding the train info function 
