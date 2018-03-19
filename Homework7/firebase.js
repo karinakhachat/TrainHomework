@@ -1,4 +1,4 @@
-
+$(document).ready(function (){
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyB-IfrW9jtMzS26BtNEsELys2Ty68Le9pI",
@@ -9,11 +9,13 @@
     messagingSenderId: "86243128591"
   };
   
-
   console.log(config);
 
   firebase.initializeApp(config);
-
+      window.onload(function (){
+      console.log("onload")
+      })
+      
   var database = firebase.database();
 
   var trainName= $("#name-input").val();
@@ -21,9 +23,10 @@
   var firstTrain= moment($("#start-input").val());
   var frequencyMin= moment($("#rate-input").val());
 
+
+//adding the train info function 
     $("#add-train").on("click", function(event) {
 
-    
 
     var NewTrain= {
       name: trainName,
@@ -31,6 +34,8 @@
       firstT: firstTrain,
       frequency: frequencyMin
   };
+
+  console.log(NewTrain)
 
   database.ref().push(NewTrain);
 
@@ -41,4 +46,5 @@
 
 
 
+})
 })
