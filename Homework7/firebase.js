@@ -1,4 +1,4 @@
-$(document).ready(function () {
+
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyB-IfrW9jtMzS26BtNEsELys2Ty68Le9pI",
@@ -9,13 +9,16 @@ $(document).ready(function () {
     messagingSenderId: "86243128591"
   };
 
-  console.log(config);
+  //console.log(config);
 
   firebase.initializeApp(config);
 
+  var database = firebase.database();
+
+
   $("#add-train").on("click", function () {
 
-    var database = firebase.database();
+    
 
     var trainName = $("#name-input").val();
     var destination = $("#role-input").val();
@@ -34,42 +37,56 @@ $(document).ready(function () {
       frequency: frequencyMin
     };
 
-    console.log(NewTrain)
+    //console.log(NewTrain)
 
     database.ref().push(NewTrain);
 
-    console.log(NewTrain.name);
-    console.log(NewTrain.arrival);
-    console.log(NewTrain.firstT);
-    console.log(NewTrain.frequency);
+    //console.log(NewTrain.name);
+    //console.log(NewTrain.arrival);
+    //console.log(NewTrain.firstT);
+    //console.log(NewTrain.frequency);
 
     return false;
 //emptying function
-    function empty () {
+//working ^^^
+    
       
-    $("#name-input").empty();
-    $("#role-input").empty();
-     $("#start-input").empty();
-     $("#rate-input").empty();
-    }
+    $("#name-input").val("");
+    $("#role-input").val("");
+    $("#start-input").val("");
+    $("#rate-input").val("");
+    
 
-    empty()
+  })
 
-    data.ref().orderByChild("dateAdded").limitToLast(1).on("child_added"), function(snapshot){
+    database.ref().on("child_added", function(snapshot){
+      //console.log(snapshot.val())
+      $(".table tbody").append("<tr><td>" + snapshot.val().name + "</td><td>" 
+      + snapshot.val().arrival  + "</td><td>" + snapshot.val().frequency + "</td><td>" 
+      + snapshot.val().firstT + "</td></tr>" );
 
-      $("#name-input").text(snapshot.val().name);
-      $("role-input").text(snapshot.val().arrival);
-      $("#start-input").text(snapshot.val().firstT);
-      $("#rate-input").text(snapshot.val().frequency);
-    }
+    
 
 //make time conversions with moment.js
-
+ 
     var newFrequency = 0;
-    var currentTime = moment();
-    var firstTime = 0;
+    var firstTime = snapshot.val().firstT;
+    var firstTimeConverted = 0;
     var minutesAway = 0;
 
-//calculate when next train will arive
-  })
+    var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+    console.log(firstTimeConverted)
+
+    var diffTime = moment().diff(firstTimeConverted, "minutes");
+    console.log(diffTime);
+
+    var remaindertime = diffTime % frequencyMin;
+    console.log(remaindertime)
+    
+    var minutesAway = frequencyMin - remaindertime;
+    console.log(minutesAway)
 })
+
+
+
+
